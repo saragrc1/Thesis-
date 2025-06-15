@@ -10,8 +10,8 @@ from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
 
 # Load data
-path_2023 = "/Users/saragarciadefuentes/Documents/TESIS/DATOS/2023 DATOS.xlsx"
-path_2024 = "/Users/saragarciadefuentes/Documents/TESIS/DATOS/2024_DATOS_CLEAN.xlsx"
+path_2023 = "2023 DATOS.xlsx"
+path_2024 = "2024_DATOS_CLEAN.xlsx"
 df_2023 = pd.read_excel(path_2023, dtype=str)
 df_2024 = pd.read_excel(path_2024, dtype=str)
 
@@ -20,7 +20,7 @@ common_clients = set(df_2023["COD"]).intersection(df_2024["COD"])
 df_2023_common = df_2023[df_2023["COD"].isin(common_clients)].copy()
 df_2024_common = df_2024[df_2024["COD"].isin(common_clients)].copy()
 
-# ---------- First Clustering: Annual Behavior ----------
+#First Clustering: Engagement-based
 df1 = df_2023_common.copy()
 
 # Select and convert relevant columns
@@ -77,7 +77,9 @@ final_silhouette = silhouette_score(X1_scaled, df1['CLUSTER_NEW_VARS'])
 print(f"Final Silhouette Score: {final_silhouette:.4f}")
 print(f"Cluster Distribution:\n{df1['CLUSTER_NEW_VARS'].value_counts()}")
 
-# ---------- Second Clustering: Category Behavior ----------
+############################################################################
+
+# Second Clustering: Product Mix
 df2 = df_2023_common.copy()
 
 # Convert all relevant columns
@@ -167,7 +169,7 @@ final_silhouette = silhouette_score(X2_scaled, df2['CLUSTER_RELATIVE_CATEGORIES'
 print(f"Final Silhouette Score (Category Data): {final_silhouette:.4f}")
 print(f"Cluster Distribution:\n{df2['CLUSTER_RELATIVE_CATEGORIES'].value_counts()}")
 
-
+############################################################################
 # Merge both clustering results
 
 merged = df1[['COD', 'CLUSTER_NEW_VARS']].merge(df2[['COD', 'CLUSTER_RELATIVE_CATEGORIES']], on='COD')
