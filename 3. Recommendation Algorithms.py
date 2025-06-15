@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Jun 15 02:19:12 2025
 
-@author: saragarciadefuentes
-"""
 
 import numpy as np
 import pandas as pd
@@ -16,8 +12,8 @@ from scipy.sparse import csr_matrix
 import matplotlib.pyplot as plt
 
 # Load data
-data_2023 = pd.read_excel("/Users/saragarciadefuentes/Documents/TESIS/DATOS/2023_DATOS_CLUSTERED.xlsx")
-data_2024 = pd.read_excel("/Users/saragarciadefuentes/Documents/TESIS/DATOS/2024_DATOS_CLEAN.xlsx")
+data_2023 = pd.read_excel("2023_DATOS_CLUSTERED.xlsx")
+data_2024 = pd.read_excel("2024_DATOS_CLEAN.xlsx")
 
 
 # Clean and standardize column names  to enable the matching between datasets
@@ -172,7 +168,7 @@ for name, rec_fn in methods.items():
 
 
 
-# === 9. Summarize and test results ===
+# Summarize and test results 
 summary = []
 for name, scores in precision_scores.items():
     summary.append((name, np.mean(scores) if scores else 0.0))
