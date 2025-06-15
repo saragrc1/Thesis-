@@ -24,6 +24,9 @@ df = pd.merge(
     df_2023[['COD', 'TOTAL_VENTAS_2023', 'CLUSTER_NEW_VARS', 'CLUSTER_RELATIVE_CATEGORIES']],
     on='COD', how='inner'
 )
+## CLUSTER_NEW_VARS: clustering resulting from Engagement-Based clustering 
+## CLUSTER_RELATIVE_CATEGORIES: clustering resulting from Product Mix clustering 
+
 
 df['LOG_VENTAS_2023'] = np.log1p(df['TOTAL_VENTAS_2023'])
 df['LOG_VENTAS_2024'] = np.log1p(df['TOTAL_VENTAS_2024'])
@@ -171,6 +174,9 @@ print("\nError Metrics by Quartile (Full vs Trimmed):\n", quartile_comparison)
 
 
 
+#########################
+#### Output
+#########################
 
 # Export final results
 if 'ESTABLECIMIENTO' not in df.columns:
